@@ -19,15 +19,20 @@
 pipeline {
     agent { label 'centos7-docker-4c-2g' }
     stages {
-        stage('Test') {
+        stage('Snap') {
             when {
-                expression { findFiles(glob: 'snap/notsnapcraft.yaml').length == 1 }
+                expression { findFiles(glob: 'snap/snapcraft.yaml').length == 1 }
             }
             steps {
                 script {
                     docker.image('ernestoojeda/artii').inside('--entrypoint=') {
                         sh 'artii -f slant "OH SNAP!"'
                     }
+
+                    edgeXSnap(
+                        jobType: edgex.isReleaseStream()
+                            ? 'stage' : 'build'
+                    )
                 }
             }
         }
