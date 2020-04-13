@@ -23,10 +23,10 @@ pipeline {
             steps {
                 script {
                     def files = findFiles glob: 'snap/snapcraft.yaml'
-                    println files
+                    println files.length
 
                     def notfiles = findFiles glob: 'snap/snapper.snap'
-                    println notfiles
+                    println notfiles.length
                 }
             }
         }
