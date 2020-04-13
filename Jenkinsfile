@@ -21,7 +21,7 @@ pipeline {
     stages {
         stage('Test') {
             when {
-                expression { findFiles(glob: 'snap/snapcraft.yaml').length == 1 }
+                expression { findFiles(glob: 'snap/notsnapcraft.yaml').length == 1 }
             }
             steps {
                 script {
