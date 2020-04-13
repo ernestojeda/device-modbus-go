@@ -21,7 +21,13 @@ pipeline {
     stages {
         stage('Test') {
             steps {
-                sh 'ls -al .'
+                script {
+                    def files = findFiles glob: 'snap/snapcraft.yaml'
+                    println files
+
+                    def notfiles = findFiles glob: 'snap/snapper.snap'
+                    println notfiles
+                }
             }
         }
     }
