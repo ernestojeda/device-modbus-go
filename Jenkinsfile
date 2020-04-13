@@ -30,7 +30,7 @@ pipeline {
                     }
 
                     edgex.bannerMessage 'This is a proof of concept'
-                    sh 'echo 1.1.2 > ./VERSION'
+                    sh 'echo v1.1.2 > ./VERSION'
                     edgeXSnap(
                         jobType: edgex.isReleaseStream()
                             ? 'stage' : 'build'
