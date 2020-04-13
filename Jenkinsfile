@@ -14,7 +14,15 @@
 // limitations under the License.
 //
 
-edgeXBuildGoApp (
-    project: 'device-modbus-go',
-    goVersion: '1.13'
-)
+@Library("edgex-global-pipelines@experimental") _
+
+pipeline {
+    agent { label 'centos7-docker-4c-2g' }
+    stages {
+        stage('Test') {
+            steps {
+                sh 'ls -al .'
+            }
+        }
+    }
+}
