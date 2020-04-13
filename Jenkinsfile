@@ -38,5 +38,25 @@ pipeline {
                 }
             }
         }
+
+        stage('Snap my ARM') {
+            agent { label 'ubuntu18.04-docker-arm64-4c-16g' }
+            environment {
+                ARCH = 'arm64'
+            }
+            when {
+                expression { findFiles(glob: 'snap/snapcraft.yaml').length == 1 }
+            }
+            steps {
+                script {
+                    edgex.bannerMessage 'This is a proof of concept for ARM'
+                    sh 'echo v1.1.2 > ./VERSION'
+                    edgeXSnap(
+                        jobType: edgex.isReleaseStream()
+                            ? 'stage' : 'build'
+                    )
+                }
+            }
+        }
     }
 }
