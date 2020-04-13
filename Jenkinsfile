@@ -20,13 +20,14 @@ pipeline {
     agent { label 'centos7-docker-4c-2g' }
     stages {
         stage('Test') {
+            when {
+                expression { findFiles(glob: 'snap/snapcraft.yaml').length == 1 }
+            }
             steps {
                 script {
-                    def files = findFiles glob: 'snap/snapcraft.yaml'
-                    println files.length
-
-                    def notfiles = findFiles glob: 'snap/snapper.snap'
-                    println notfiles.length
+                    docker.image('ernestoojeda/artii').inside {
+                        sh 'echo "OH SNAP!" | artii -f slant'
+                    }
                 }
             }
         }
