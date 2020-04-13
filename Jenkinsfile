@@ -26,7 +26,7 @@ pipeline {
             steps {
                 script {
                     docker.image('ernestoojeda/artii').inside('--entrypoint=') {
-                        sh 'echo "OH SNAP!" | artii -f slant'
+                        sh 'artii -f slant "OH SNAP!"'
                     }
                 }
             }
