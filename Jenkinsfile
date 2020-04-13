@@ -29,6 +29,8 @@ pipeline {
                         sh 'artii -f slant "OH SNAP!"'
                     }
 
+                    edgex.bannerMessage 'This is a proof of concept'
+                    sh 'echo 1.1.2 > ./VERSION'
                     edgeXSnap(
                         jobType: edgex.isReleaseStream()
                             ? 'stage' : 'build'
